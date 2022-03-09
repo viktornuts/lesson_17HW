@@ -20,7 +20,7 @@ public class ReqresTestsWithoutPojo {
 
     @Test
     @DisplayName("Убедиться , что имена файлов-автоаров пользователей совпадают, коночание email @reqres.in")
-    public void chekAvatarAndIdTest1(){
+    public void chekAvatarAndIdTest1() {
         Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecOK200());
         Response response = (Response) given()
                 .when()
@@ -39,16 +39,16 @@ public class ReqresTestsWithoutPojo {
         List<Integer> ids = jsonPath.get("data.id");
         List<String> avatars = jsonPath.get("data.avatar");
 
-        for (int i=0; i < avatars.size(); i++) {
+        for (int i = 0; i < avatars.size(); i++) {
             Assertions.assertTrue(avatars.get(i).contains(ids.get(i).toString()));
         }
-        Assertions.assertTrue(emails.stream().allMatch(x-> x.endsWith("@reqres.in")));
+        Assertions.assertTrue(emails.stream().allMatch(x -> x.endsWith("@reqres.in")));
 
     }
 
     @Test
     @DisplayName("Запрос на успешную регистрацию")
-    public void seccessRegTest1(){
+    public void seccessRegTest1() {
         Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecOK200());
         Map<String, String> user = new HashMap<>();
         user.put("email", "eve.holt@reqres.in");
@@ -71,9 +71,10 @@ public class ReqresTestsWithoutPojo {
 
 
     }
+
     @Test
     @DisplayName("Запрос на неуспешную регистрацию")
-    public void unseccessRegTest1(){
+    public void unseccessRegTest1() {
         Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecError400());
 
         Map<String, String> user = new HashMap<>();
@@ -92,7 +93,7 @@ public class ReqresTestsWithoutPojo {
 
     @Test
     @DisplayName("Удаление пользователя, проверяем , что статус метода Делет 204")
-    public void deleteUserTest1(){
+    public void deleteUserTest1() {
         Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecUnique(204));
         given()
                 .when()
@@ -104,7 +105,7 @@ public class ReqresTestsWithoutPojo {
 
     @Test
     @DisplayName("Обновить инфу о пользователе")
-    public void updateUserTest1(){
+    public void updateUserTest1() {
         Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecOK200());
         Map<String, String> user = new HashMap<>();
         user.put("name", "morpheus");
@@ -120,7 +121,6 @@ public class ReqresTestsWithoutPojo {
 
 
     }
-
 
 
 }
